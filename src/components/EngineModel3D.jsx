@@ -6,7 +6,7 @@ import { OrbitControls, useGLTF, Stage, ContactShadows, Html } from '@react-thre
 import Gauge from './Gauge'
 
 function Model() {
-    const { scene } = useGLTF('/engine.glb')
+    const { scene } = useGLTF(`${import.meta.env.BASE_URL}engine.glb`)
     return <primitive object={scene} scale={8} position-y={-0.9} />
 }
 
