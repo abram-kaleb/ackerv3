@@ -24,17 +24,15 @@ jobs:
         with:
           node-version: 20
 
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Fix Vite Permissions (Radical Fix)
+      - name: Radical Dependency Fix
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+          
+      - name: Fix Permissions and Build
         run: |
           chmod -R +x node_modules/.bin
-          ls -la node_modules/.bin/vite
-
-      - name: Build
-        run: npx --no-install vite build
+          npx vite build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
