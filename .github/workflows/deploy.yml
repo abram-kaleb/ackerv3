@@ -18,15 +18,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Fix Vite Permissions (Radical Fix)
+        run: |
+          chmod -R +x node_modules/.bin
+          ls -la node_modules/.bin/vite
+
       - name: Build
-        run: npm run build
+        run: npx --no-install vite build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
